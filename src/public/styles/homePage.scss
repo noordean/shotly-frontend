@@ -1,0 +1,100 @@
+
+.page {
+  background-color: #2EA2E2;
+  color: white;
+  height: 100vh;
+  font-family: 'Gentium Basic';
+
+  .header-wrapper {
+    text-transform: uppercase;
+    border-bottom: 1.5px inset #357ec7;
+    padding-bottom: 20px;
+
+    .header-title {
+      font-weight: bold;
+      font-size: 25px;
+      margin-left: 2em;
+    }
+    
+    .header-nav {
+      font-size: 12px;
+      margin-right: 5em;
+
+      span:first-child:hover {
+        border-top: 1px solid white;
+      }
+
+      span {
+        margin: 10px;
+        cursor: pointer;
+
+        a {
+          margin-top: 5px;
+          border: 1px solid #357ec7;
+        }
+      }
+    }
+  }
+
+ .homepage-body-wrapper {
+   margin: 40px auto 0px auto;
+   width: 100vh;
+
+   .second-text {
+     text-align: center;
+     color: #e5e5e5 !important;
+   }
+
+   .btn-wrapper {
+     text-align: center;
+     
+     a:first-child {
+       background-color: #2EA2E2;
+     }
+
+     a:first-child:hover {
+       background-color: #357ec7;
+     }
+     
+     a {
+       width: 10em;
+       border: 1px solid #357ec7;
+       margin: 30px 10px;
+       cursor: pointer;
+     }
+   }
+
+    .url-submit {
+      width: 6em;
+      background-color: #2EA2E2;
+      border: 1px solid #357ec7;
+      cursor: pointer;
+    }
+
+    .url-submit:hover {
+      background-color: #357ec7;
+    }
+
+    .submit-form {
+      padding-left: 20px;
+
+      :first-child {
+        padding-right: 0;
+        padding-left: 1px;
+      }
+
+      .url-submit-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  }
+
+  .footer {
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    font-size: 15px;
+  }
+}
