@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> should render the necessary elements 1`] = `
+<div
+  className="footer"
+>
+  © 2018 Copyright noordean.
+</div>
+`;

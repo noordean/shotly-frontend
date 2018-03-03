@@ -4,7 +4,7 @@
   "description": "An app that shortens ugly and long urls",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-core/register --require ./test/setup.js 'test/**/*.@(js|jsx)'"
+    "test": "jest --coverage tests"
   },
   "repository": {
     "type": "git",
@@ -29,9 +29,18 @@
     "babel-preset-react": "^6.24.1",
     "chai": "^4.1.2",
     "chai-immutable": "^1.6.0",
+    "css-loader": "^0.28.10",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "jest": "^22.4.2",
     "jsdom": "^11.6.2",
     "mocha": "^5.0.1",
+    "node-sass": "^4.7.2",
+    "react-addons-test-utils": "^15.6.2",
     "react-hot-loader": "^4.0.0",
+    "react-test-renderer": "^16.2.0",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.20.2",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9",
     "webpack-dev-server": "^3.1.0"
