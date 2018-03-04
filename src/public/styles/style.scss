@@ -14,6 +14,8 @@
       font-weight: bold;
       font-size: 25px;
       margin-left: 2em;
+      text-decoration: none;
+      color: white;
     }
     
     .header-nav {
@@ -96,5 +98,59 @@
     bottom: 0;
     position: fixed;
     font-size: 15px;
+  }
+
+  .form-page {
+    margin: 10vh auto;
+    width: 70vh;
+    border: 1px solid #357ec7;
+    border-radius: 4px;
+    padding: 3vh 0;
+
+    form {
+      margin: 0 auto;
+      width: 60vh;
+
+      a {
+        cursor: pointer;
+      }
+    }
+
+    h4 {
+      margin-bottom: 3vh;
+    }
+  }
+
+  .social-login-icons {
+    text-align: right;
+    margin-top: 5px;
+    
+    .fa-facebook:hover {
+      color: blue;
+    }
+
+    .fa-google:hover {
+      color: red;
+    }
+
+    .fa-facebook, .fa-google {
+      cursor: pointer;
+    }
+
+    span {
+      margin: 5px;
+    }
+  }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 1000px) {
+  .page {
+    .form-page {
+      width: 35vh;
+
+      form {
+        width: 30vh;
+      }
+    }
   }
 }

@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from '../components/App.jsx';
+import Router from '../components/Router.jsx';
 
 ReactDOM.render(
   <div>
-    <App />
+    <Router />
   </div>,
   document.getElementById('app')
 );
