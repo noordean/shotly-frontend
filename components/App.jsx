@@ -1,16 +1,16 @@
 import React from 'react';
 
-import HomePage from './HomePage.jsx';
+import Header from './Header.jsx';
+import Footer from './Footer.jsx';
 
-require('../src/public/styles/homePage.scss');
+require('../src/public/styles/style.scss');
 
-export default class Link extends React.Component {
+const App = props => (
+  <div class='page'>
+    <Header />
+      {props.children}
+    <Footer />
+  </div>
+);
 
-  render() {
-    return (
-      <div class='page'>
-        <HomePage />
-      </div>
-    )
-  }
-};
+export default App;
