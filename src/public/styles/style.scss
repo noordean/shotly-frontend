@@ -36,6 +36,15 @@
         }
       }
     }
+
+    .modal-title {
+      color: #2EA2E2;
+      font-weight: bold;
+    }
+
+    .modal-close-btn, .modal-send-btn {
+      cursor: pointer;
+    }
   }
 
  .homepage-body-wrapper {
