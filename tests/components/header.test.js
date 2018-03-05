@@ -15,6 +15,8 @@ describe('<Header />', () => {
   const title = wrapper.find('.header-title');
   const span = wrapper.find('span')
   expect(title.text()).toBe('Shotly');
-  expect(span.length).toBe(2);
+  expect(span.length).toBe(3);
+  expect(wrapper.find('.modal').length).toBe(1)
+  expect(wrapper.find('.modal-title').text()).toBe('Contact us');
   });
 });
