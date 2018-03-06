@@ -150,6 +150,20 @@
       margin: 5px;
     }
   }
+
+  .about-us-page {
+
+    img {
+      width: 96%;
+      margin: 20px auto;
+    }
+
+    .about-us-text {
+      width: 53vh;
+      margin: 2px auto;
+      font-size: 18px;
+    }
+  }
 }
 
 @media only screen and (min-width: 360px) and (max-width: 1000px) {

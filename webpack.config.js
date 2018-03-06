@@ -18,7 +18,17 @@ module.exports = {
       {
         test: /\.scss$/,
         use: ['style-loader','css-loader', 'sass-loader']
-      }
+      },
+        {
+          test: /\.(png|jp(e*)g|svg)$/,  
+          use: [{
+              loader: 'url-loader',
+              options: { 
+                limit: 8000,
+                name: 'src/public/images/[hash]-[name].[ext]'
+              } 
+          }]
+        }
     ]
   },
   resolve: {
