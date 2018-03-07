@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// import Input from './Input.jsx';
-// import Button from './Button.jsx';
+import EditUrlModal from './EditUrlModal.jsx';
 
 export default class TopLinks extends React.Component {
 
@@ -24,58 +23,60 @@ export default class TopLinks extends React.Component {
             <td>https://aurl.com/shut</td>
             <td>4</td>
             <td>Nigeria</td>
-            <td><span className="fa fa-pencil"> <span className="fa fa-trash"></span></span></td>
+            <td><span className="fa fa-pencil" data-toggle="modal" data-target="#editModal"> </span> <span className="fa fa-trash"></span></td>
           </tr>
           <tr>
             <th scope="row">2</th>
             <td>https://aurl.com/shut</td>
             <td>4</td>
             <td>Nigeria</td>
-            <td><span className="fa fa-pencil"> <span className="fa fa-trash"></span></span></td>
+            <td><span className="fa fa-pencil" data-toggle="modal" data-target="#editModal"> </span> <span className="fa fa-trash"></span></td>
           </tr>
           <tr>
             <th scope="row">3</th>
             <td>https://aurl.com/shut</td>
             <td>4</td>
             <td>Nigeria</td>
-            <td><span className="fa fa-pencil"> <span className="fa fa-trash"></span></span></td>
+            <td><span className="fa fa-pencil" data-toggle="modal" data-target="#editModal"> </span> <span className="fa fa-trash"></span></td>
           </tr>
           <tr>
             <th scope="row">4</th>
             <td>https://aurl.com/shut</td>
             <td>4</td>
             <td>Nigeria</td>
-            <td><span className="fa fa-pencil"> <span className="fa fa-trash"></span></span></td> 
+            <td><span className="fa fa-pencil" data-toggle="modal" data-target="#editModal"> </span> <span className="fa fa-trash"></span></td>
           </tr>
           <tr>
             <th scope="row">5</th>
             <td>https://aurl.com/shut</td>
             <td>4</td>
             <td>Nigeria</td>
-            <td><span className="fa fa-pencil"> <span className="fa fa-trash"></span></span></td>
+            <td><span className="fa fa-pencil" data-toggle="modal" data-target="#editModal"> </span> <span className="fa fa-trash"></span></td>
           </tr>
           <tr>
             <th scope="row">5</th>
             <td>https://aurl.com/shut</td>
             <td>4</td>
             <td>Nigeria</td>
-            <td><span className="fa fa-pencil"> <span className="fa fa-trash"></span></span></td>
+            <td><span className="fa fa-pencil" data-toggle="modal" data-target="#editModal"> </span> <span className="fa fa-trash"></span></td>
           </tr>
           <tr>
             <th scope="row">5</th>
             <td>https://aurl.com/shut</td>
             <td>4</td>
             <td>Nigeria</td>
-            <td><span className="fa fa-pencil"> <span className="fa fa-trash"></span></span></td>
+            <td><span className="fa fa-pencil" data-toggle="modal" data-target="#editModal"> </span> <span className="fa fa-trash"></span></td>
           </tr>
           <tr>
             <th scope="row">5</th>
             <td>https://aurl.com/shut</td>
             <td>4</td>
             <td>Nigeria</td>
-            <td><span className="fa fa-pencil"> <span className="fa fa-trash"></span></span></td>
+            <td><span className="fa fa-pencil" data-toggle="modal" data-target="#editModal"> </span> <span className="fa fa-trash"></span></td>
           </tr>
         </tbody>
+
+        <EditUrlModal />
       </table>
     )
   }

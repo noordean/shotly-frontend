@@ -14,5 +14,6 @@ describe('<Dashboard />', () => {
     );
     expect(wrapper.find('#myChart').length).toBe(1);
     expect(wrapper.find('.toplinks-table').length).toBe(1);
+    expect(wrapper.find('#editModal').length).toBe(1);
   });
 });
