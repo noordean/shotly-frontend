@@ -49,6 +49,7 @@
     "webpack-dev-server": "^3.1.0"
   },
   "dependencies": {
+    "chart.js": "^2.7.2",
     "immutable": "^3.8.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
