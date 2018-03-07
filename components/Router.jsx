@@ -6,6 +6,7 @@ import App from './App.jsx';
 import SignUp from './SignUp.jsx';
 import SignIn from './SignIn.jsx';
 import AboutUsPage from './AboutUsPage.jsx';
+import Dashboard from './Dashboard.jsx';
 
 const Router = () => (
   <BrowserRouter>
@@ -15,6 +16,7 @@ const Router = () => (
       <Route exact path='/signin' component={ SignIn } />
       <Route exact path='/signup' component={ SignUp } />
       <Route exact path='/aboutus' component={ AboutUsPage } />
+      <Route exact path='/dashboard' component={ Dashboard } />
     </Switch>
     </App>
   </BrowserRouter>

@@ -164,6 +164,40 @@
       font-size: 18px;
     }
   }
+
+  .dashboard {
+    margin: 20px auto 0px auto;
+    width: 1200px;
+
+    .toplinks-wrapper {
+      max-height: 300px;
+      overflow-y: scroll;
+      margin: 0px auto;
+      width: 100%;
+    }
+    
+    .chart-area {
+      background-color: white;
+    }
+
+    .toplinks-table {
+      background-color: rgb(46, 162, 226);
+      border: 1px solid white;
+      margin: 0px auto;
+      width: 100%;
+
+      tbody tr td {
+        .fa {
+          cursor: pointer;
+        }
+
+        .fa-trash {
+          margin-left: 3px;
+          color: #ff0000;
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (min-width: 360px) and (max-width: 1000px) {
@@ -178,6 +212,6 @@
 
     .homepage-body-wrapper {
       width: 35vh;
-      }
     }
+  }
 }
