@@ -6,7 +6,7 @@ import Input from './Input.jsx';
 import Button from './Button.jsx';
 import TopLinks from './TopLinks.jsx';
 
-export default class Dashboard extends React.Component {
+export class Dashboard extends React.Component {
 
   componentDidMount() {
     const ctx = document.getElementById("myChart").getContext("2d");
@@ -61,3 +61,5 @@ export default class Dashboard extends React.Component {
     )
   }
 };
+
+export default Dashboard;

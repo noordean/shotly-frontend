@@ -1,12 +1,63 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import $ from 'jquery';
 
 import Input from './Input.jsx';
 import Button from './Button.jsx';
+import ShortenedLink from './ShortenedLink.jsx';
 
-export default class HomePage extends React.Component {
+import { shortenUrl } from '../actions/url';
+
+export class HomePage extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      originalUrl: ''
+    };
+    this.onChange = this.onChange.bind(this);
+    this.shortenUrlHandler = this.shortenUrlHandler.bind(this);
+    this.copyShortenedUrl = this.copyShortenedUrl.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const errorMessage = nextProps.shortenedUrl.errorMessage;
+    if (errorMessage !== '') {
+      return $.toaster(errorMessage, '', 'danger');
+    }
+  }
+
+  onChange(element) {
+    this.setState({
+      [element.target.name]: element.target.value,
+    });
+  }
+
+  shortenUrlHandler() {
+    if (this.state.originalUrl.trim().length === 0) {
+      return $.toaster('Kindly supply the url to shorten', '', 'danger');
+    }
+
+    this.props.shortenUrl(this.state.originalUrl);
+    $('.copy').text('Copy');
+  }
+
+  copyShortenedUrl() {
+    $('.shortened-link').append("<input type='text' id='copy-url' />")
+    $("#copy-url").val($("#shortened-url").text())
+
+    const copyText = document.getElementById('copy-url');
+    copyText.select();
+    document.execCommand('Copy');
+    $("#copy-url").remove();
+
+    $('.copy').text('Copied!');
+  }
 
   render() {
+    const { shortenedUrl } = this.props.shortenedUrl
     return (
       <div className="row homepage-body-wrapper">
         <div>
@@ -25,17 +76,31 @@ export default class HomePage extends React.Component {
               <Input
                 inputType="text"
                 inputPlaceHolder="Enter url"
+                originalUrl={this.state.originalUrl}
+                onChange={this.onChange}
               />
             </div>
             <div className="col-sm-2 url-submit-wrapper">
               <Button
                 btnClass="btn url-submit"
                 text="Shorten"
+                onClick={this.shortenUrlHandler}
               />
             </div>
+            {Object.keys(shortenedUrl).length !== 0 ? <ShortenedLink shortenedUrl={shortenedUrl.shortened_url} copyUrl={this.copyShortenedUrl} /> : ''}
           </div>
         </div>
       </div>
     )
   }
 };
+
+const mapStateToProps = state => ({
+  shortenedUrl: state.shortenedUrl
+});
+
+const matchDispatchToProps = dispatch => bindActionCreators({
+  shortenUrl
+}, dispatch);
+
+export default connect(mapStateToProps, matchDispatchToProps)(HomePage);
