@@ -99,6 +99,28 @@
         padding-right: 0;
       }
     }
+
+    .shortened-link {
+      width: 96%;
+      height: 10vh;
+      background: white;
+      border-radius: 3px;
+      color: black;
+      margin-left: 5px;
+      margin-top: 2px;
+
+      
+      .copy {
+        text-align: center;
+        background: #F5F5F5;
+        height: 22px;
+        cursor: pointer;
+      }
+
+      .copy:hover {
+        font-weight: bold;
+      }
+    }
   }
 
   .footer {

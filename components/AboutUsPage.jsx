@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import chartImage from '../src/public/images/chat.png'
 
-export default class AboutUsPage extends React.Component {
+export class AboutUsPage extends React.Component {
 	componentDidMount() {
     const aboutUsImage = document.getElementById('about-us-img');
 		aboutUsImage.src = chartImage
@@ -23,3 +23,5 @@ export default class AboutUsPage extends React.Component {
     )
   }
 };
+
+export default AboutUsPage;
