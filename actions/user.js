@@ -14,6 +14,20 @@ const userRegFailure = (errorMessage) => {
   }
 }
 
+const loginSuccess = (userDetails) => {
+  return {
+    type: 'LOGIN_SUCCESS',
+    userDetails
+  }
+}
+
+const loginFailure = (errorMessage) => {
+  return {
+    type: 'LOGIN_FAILURE',
+    errorMessage
+  }
+}
+
 export function registerUser(userDetails) {
   return (dispatch) => {
     return axios.post('https://shotly-api.herokuapp.com/users', userDetails)
@@ -23,6 +37,19 @@ export function registerUser(userDetails) {
       })
       .catch((error) => {
         dispatch(userRegFailure(error.response.data.message));
+      });
+    };
+  }
+
+export function loginUser(userDetails) {
+  return (dispatch) => {
+    return axios.post('https://shotly-api.herokuapp.com/login', userDetails)
+      .then((response) => {
+        dispatch(loginSuccess(response.data));
+        localStorage.setItem('token', response.data.token);
+      })
+      .catch((error) => {
+        dispatch(loginFailure(error.response.data.message));
       });
     };
   }

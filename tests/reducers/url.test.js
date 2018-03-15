@@ -32,7 +32,7 @@ describe('Url Reducer', () => {
   });
   it('should return the initial state if unidentified action type is passed', () => {
     const action = {
-      type: 'USER_UNRECOGNIZED'
+      type: 'SHORTEN_UNRECOGNIZED'
     };
     const expected = {
       shortenedUrl: {},
