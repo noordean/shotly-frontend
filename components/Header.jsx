@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Button from './Button.jsx';
 import ContactModal from './ContactModal.jsx';
+import LoginLogoutLink from './LoginLogoutLink.jsx';
 
-export default class Header extends React.Component {
+export class Header extends React.Component {
 
   render() {
     return (
@@ -13,17 +15,29 @@ export default class Header extends React.Component {
           <Link to="/" className="header-title">Shotly</Link>
         </div>
         <div className="col-sm-6">
-          <div className="pull-right header-nav">
-            <span data-toggle="modal" data-target="#contactModal">Contact</span>
-            <span>
-              <Link to='/signin' className="btn btn-success btn-sm">
-                Sign in
-              </Link>
-            </span>
-          </div>
+          {
+            this.props.userRegistration.isAuthenticated ?
+            <div className="pull-right header-nav">
+              <span>
+                <LoginLogoutLink text={"Sign out"} path={"/"} linkClass="btn btn-danger btn-sm" />
+              </span>
+            </div> :
+            <div className="pull-right header-nav">
+              <span data-toggle="modal" data-target="#contactModal">Contact</span>
+              <span>
+                <LoginLogoutLink text={"Sign in"} path={"/signin"} linkClass="btn btn-success btn-sm" />
+              </span>
+            </div>
+          }
         </div>
         <ContactModal />
       </div>
     )
   }
 };
+
+const mapStateToProps = state => ({
+  userRegistration: state.userRegistration
+});
+
+export default connect(mapStateToProps)(Header);

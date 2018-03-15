@@ -74,9 +74,10 @@ export class HomePage extends React.Component {
           <div className="row submit-form">
             <div className="col-sm-10">
               <Input
+                inputName="originalUrl"
                 inputType="text"
                 inputPlaceHolder="Enter url"
-                originalUrl={this.state.originalUrl}
+                inputValue={this.state.originalUrl}
                 onChange={this.onChange}
               />
             </div>
