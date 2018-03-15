@@ -16,7 +16,7 @@ export class Header extends React.Component {
         </div>
         <div className="col-sm-6">
           {
-            this.props.userRegistration.isAuthenticated ?
+            this.props.userRegistration.isAuthenticated || this.props.userLogin.isAuthenticated ?
             <div className="pull-right header-nav">
               <span>
                 <LoginLogoutLink text={"Sign out"} path={"/"} linkClass="btn btn-danger btn-sm" />
@@ -37,7 +37,8 @@ export class Header extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  userRegistration: state.userRegistration
+  userRegistration: state.userRegistration,
+  userLogin: state.userLogin
 });
 
 export default connect(mapStateToProps)(Header);

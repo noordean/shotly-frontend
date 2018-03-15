@@ -14,6 +14,15 @@ const props = {
     },
     errorMessage: '',
     isAuthenticated: false
+  },
+  userLogin: {
+    userDetails: {
+      id: 1,
+      username: 'noordean',
+      token: 'some_jargons'
+    },
+    errorMessage: '',
+    isAuthenticated: false
   }
 };
 describe('<Header />', () => {

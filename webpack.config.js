@@ -40,7 +40,8 @@ module.exports = {
     filename: 'bundle.js'
   },
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
+    historyApiFallback: true
   },
   // plugins: [
   //   new webpack.HotModuleReplacementPlugin()
