@@ -27,8 +27,8 @@ export default class EditUrlModal extends React.Component {
                 </form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-danger modal-close-btn" data-dismiss="modal">Close</button>
                 <button type="button" className="btn btn-success modal-send-btn">Save</button>
+                <button type="button" className="btn btn-danger modal-close-btn" data-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
