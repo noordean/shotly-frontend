@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 import $ from 'jquery';
 
 import Button from './Button.jsx';
@@ -15,14 +16,22 @@ export class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      originalUserUrl: ''
+      originalUserUrl: '',
+      regAuth: false,
+      loginAuth: false
     };
     this.onChange = this.onChange.bind(this);
     this.shortenUrlHandler = this.shortenUrlHandler.bind(this);
     this.copyShortenedUrl = this.copyShortenedUrl.bind(this);
+    this.signOutHandler = this.signOutHandler.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
+    this.setState({
+      regAuth: nextProps.userRegistration.isAuthenticated,
+      loginAuth: nextProps.userLogin.isAuthenticated
+    });
+
     if (this.props.userRegistration.isAuthenticated || this.props.userLogin.isAuthenticated) {
       const errorMessage = nextProps.shortenedUrl.errorMessage;
       if (errorMessage !== '') {
@@ -57,6 +66,15 @@ export class Header extends React.Component {
 
     $('.copy').text('Copied!');
   }
+  
+  signOutHandler() {
+    this.setState({
+      regAuth: false,
+      loginAuth: false
+    });
+    localStorage.removeItem('token');
+    this.context.router.history.push('/');
+  }
 
   render() {
     const { shortenedUrl } = this.props.shortenedUrl;
@@ -67,11 +85,11 @@ export class Header extends React.Component {
         </div>
         <div className="col-sm-6">
           {
-            this.props.userRegistration.isAuthenticated || this.props.userLogin.isAuthenticated ?
+            this.state.regAuth || this.state.loginAuth || localStorage.token ?
             <div className="pull-right header-nav">
               <span data-toggle="modal" data-target="#newUrlModal">Create new url</span>
               <span>
-                <NavbarLink text={"Sign out"} path={"/"} linkClass="btn btn-danger btn-sm" />
+                <a className="btn btn-danger btn-sm" onClick={this.signOutHandler}>Sign out</a>
               </span>
             </div> :
             <div className="pull-right header-nav">
@@ -94,6 +112,10 @@ export class Header extends React.Component {
     )
   }
 };
+
+Header.contextTypes = {
+  router: PropTypes.object
+}
 
 const mapStateToProps = state => ({
   userRegistration: state.userRegistration,

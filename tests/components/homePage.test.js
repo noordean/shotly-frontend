@@ -13,6 +13,7 @@ global.document.getElementById = () => ({
   select: () => {}
 });
 global.document.execCommand = () => {};
+global.localStorage = {};
 
 const props = {
   shortenedUrl: {
