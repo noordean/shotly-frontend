@@ -23,9 +23,11 @@ export class HomePage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const errorMessage = nextProps.shortenedUrl.errorMessage;
-    if (errorMessage !== '') {
-      return $.toaster(errorMessage, '', 'danger');
+    if (this.props.shortenedUrl !== nextProps.shortenedUrl) {
+      const errorMessage = nextProps.shortenedUrl.errorMessage;
+      if (errorMessage !== '') {
+        return $.toaster(errorMessage, '', 'danger');
+      }
     }
   }
 
@@ -45,8 +47,8 @@ export class HomePage extends React.Component {
   }
 
   copyShortenedUrl() {
-    $('.shortened-link').append("<input type='text' id='copy-url' />")
-    $("#copy-url").val($("#shortened-url").text())
+    $('.submit-form').append("<input type='text' id='copy-url' />");
+    $("#copy-url").val($("#shortened-url").text());
 
     const copyText = document.getElementById('copy-url');
     copyText.select();
@@ -56,8 +58,13 @@ export class HomePage extends React.Component {
     $('.copy').text('Copied!');
   }
 
+  componentWillUnmount() {
+    this.props.shortenedUrl.shortenedUrl = {};
+    this.props.shortenedUrl.errorMessage = '';
+  }
+
   render() {
-    const { shortenedUrl } = this.props.shortenedUrl
+    const { shortenedUrl } = this.props.shortenedUrl;
     return (
       <div className="row homepage-body-wrapper">
         <div>
