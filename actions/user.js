@@ -45,8 +45,8 @@ export function loginUser(userDetails) {
   return (dispatch) => {
     return axios.post('https://shotly-api.herokuapp.com/login', userDetails)
       .then((response) => {
-        dispatch(loginSuccess(response.data));
         localStorage.setItem('token', response.data.token);
+        dispatch(loginSuccess(response.data));
       })
       .catch((error) => {
         dispatch(loginFailure(error.response.data.message));

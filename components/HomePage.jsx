@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import $ from 'jquery';
@@ -64,42 +64,46 @@ export class HomePage extends React.Component {
   }
 
   render() {
-    const { shortenedUrl } = this.props.shortenedUrl;
-    return (
-      <div className="row homepage-body-wrapper">
-        <div>
-          <h5> We help organizations track and visualize their business growth around the world </h5>
-          <h6 className="second-text"> From hundreds to millions. No limits with Shotly. </h6>
-          <div className="btn-wrapper">
-            <Link to='/aboutus' className="btn btn-info btn-lg">
-              See how
-            </Link>
-            <Link to='/signup' className="btn btn-success btn-lg">
-              Create an account
-            </Link>
-          </div>
-          <div className="row submit-form">
-            <div className="col-sm-10">
-              <Input
-                inputName="originalUrl"
-                inputType="text"
-                inputPlaceHolder="Enter url"
-                inputValue={this.state.originalUrl}
-                onChange={this.onChange}
-              />
+    if (localStorage.token) {
+      return <Redirect to='/dashboard' />;
+    } else {
+        const { shortenedUrl } = this.props.shortenedUrl;
+        return (
+          <div className="row homepage-body-wrapper">
+            <div>
+              <h5> We help organizations track and visualize their business growth around the world </h5>
+              <h6 className="second-text"> From hundreds to millions. No limits with Shotly. </h6>
+              <div className="btn-wrapper">
+                <Link to='/aboutus' className="btn btn-info btn-lg">
+                  See how
+                </Link>
+                <Link to='/signup' className="btn btn-success btn-lg">
+                  Create an account
+                </Link>
+              </div>
+              <div className="row submit-form">
+                <div className="col-sm-10">
+                  <Input
+                    inputName="originalUrl"
+                    inputType="text"
+                    inputPlaceHolder="Enter url"
+                    inputValue={this.state.originalUrl}
+                    onChange={this.onChange}
+                  />
+                </div>
+                <div className="col-sm-2 url-submit-wrapper">
+                  <Button
+                    btnClass="btn url-submit"
+                    text="Shorten"
+                    onClick={this.shortenUrlHandler}
+                  />
+                </div>
+                {Object.keys(shortenedUrl).length !== 0 ? <ShortenedLink shortenedUrl={shortenedUrl.shortened_url} copyUrl={this.copyShortenedUrl} /> : ''}
+              </div>
             </div>
-            <div className="col-sm-2 url-submit-wrapper">
-              <Button
-                btnClass="btn url-submit"
-                text="Shorten"
-                onClick={this.shortenUrlHandler}
-              />
-            </div>
-            {Object.keys(shortenedUrl).length !== 0 ? <ShortenedLink shortenedUrl={shortenedUrl.shortened_url} copyUrl={this.copyShortenedUrl} /> : ''}
           </div>
-        </div>
-      </div>
-    )
+        )
+    }
   }
 };
 

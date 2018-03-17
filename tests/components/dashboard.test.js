@@ -5,6 +5,10 @@ import { MemoryRouter } from 'react-router-dom'
 import '../setup';
 import Dashboard from '../../components/Dashboard.jsx';
 
+global.localStorage = {
+  token: 'some_jargons'
+};
+
 describe('<Dashboard />', () => {
   it('should render the necessary elements', () => {
     const wrapper = render(
