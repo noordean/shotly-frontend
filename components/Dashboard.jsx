@@ -2,17 +2,33 @@ import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import Chart from 'chart.js';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Input from './Input.jsx';
 import Button from './Button.jsx';
 import TopLinks from './TopLinks.jsx';
 import HomePage from './HomePage.jsx';
 
+import { getUrls } from '../actions/url';
 
 export class Dashboard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userUrls: [],
+      isLoading: true
+    };
+    this.displayChart = this.displayChart.bind(this);
+  }
 
   componentDidMount() {
-    if (localStorage.token) {
+    this.props.getUrls(localStorage.token).then(() => {
+      this.displayChart();
+    });
+  }
+
+  displayChart() {
+    if (localStorage.token && this.state.userUrls.length !== 0) {
       const ctx = document.getElementById("myChart").getContext("2d");
       const urlChart = new Chart(ctx, {
           type: 'bar',
@@ -53,14 +69,39 @@ export class Dashboard extends React.Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.userUrls !== nextProps.userUrls) {
+      this.prepareUserUrls(nextProps.userUrls);
+    }
+  }
+
+  prepareUserUrls(userUrls) {
+    const urls = [];
+    userUrls.urls.forEach((url) => {
+      urls.push(url[0]);
+    });
+
+    this.setState({
+      userUrls: urls,
+      isLoading: false
+    });
+  }
+
   render() {
     if (!localStorage.token) {
       return <Redirect to='/' />;
     } else {
+      if (this.state.isLoading) {
+        return <div className="dashboard-msg">Loading...</div>
+      } else if (this.state.userUrls.length === 0) {
+        return <div className="dashboard-msg"> No URL to display </div>
+      }
       return (
         <div className="row dashboard">
           <div className="toplinks-wrapper">
-            <TopLinks />
+            <TopLinks
+              userUrls={this.state.userUrls}
+            />
           </div>
           <div className="chart-area">
             <canvas id="myChart" width="1200" height="300"></canvas>
@@ -71,4 +112,12 @@ export class Dashboard extends React.Component {
   }
 };
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  userUrls: state.userUrls
+});
+
+const matchDispatchToProps = dispatch => bindActionCreators({
+  getUrls
+}, dispatch);
+
+export default connect(mapStateToProps, matchDispatchToProps)(Dashboard);

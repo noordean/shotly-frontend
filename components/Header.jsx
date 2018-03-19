@@ -11,6 +11,7 @@ import NavbarLink from './NavbarLink.jsx';
 import AddNewUrlModal from './AddNewUrlModal.jsx';
 
 import { shortenUrl } from '../actions/url';
+import { getUrls } from '../actions/url';
 
 export class Header extends React.Component {
   constructor(props) {
@@ -32,7 +33,7 @@ export class Header extends React.Component {
       loginAuth: nextProps.userLogin.isAuthenticated
     });
 
-    if (this.props.userRegistration.isAuthenticated || this.props.userLogin.isAuthenticated) {
+    if (localStorage.token) {
       const errorMessage = nextProps.shortenedUrl.errorMessage;
       if (errorMessage !== '') {
         return $.toaster(errorMessage, '', 'danger');
@@ -51,7 +52,9 @@ export class Header extends React.Component {
       return $.toaster('Kindly supply the url to shorten', '', 'danger');
     }
 
-    this.props.shortenUrl(this.state.originalUserUrl);
+    this.props.shortenUrl(this.state.originalUserUrl).then(() => {
+      this.props.getUrls(localStorage.token);
+    });
     $('.copy').text('Copy');
   }
 
@@ -124,7 +127,8 @@ const mapStateToProps = state => ({
 });
 
 const matchDispatchToProps = dispatch => bindActionCreators({
-  shortenUrl
+  shortenUrl,
+  getUrls
 }, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(Header);
