@@ -14,3 +14,14 @@ export function shortenedUrl(state = initialState, action) {
       return state;
   }
 }
+
+export function getUrls(state = { urls: [], errorMessage: '' }, action) {
+  switch (action.type) {
+    case 'GET_URL_SUCCESS':
+      return { ...state, urls: action.urls, errorMessage: '' };
+    case 'GET_URL_FAILURE':
+      return { ...state, errorMessage: action.errorMessage, urls: [] };
+    default:
+      return state;
+  }
+}
