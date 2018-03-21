@@ -236,6 +236,16 @@
       border: 1px solid white;
       margin: 0px auto;
       width: 100%;
+      
+      tbody {
+        tr {
+          cursor: pointer;
+        }
+
+        tr:hover {
+          background-color: blue;
+        }
+      }
 
       tbody tr td {
         .fa {

@@ -9,6 +9,7 @@ import Button from './Button.jsx';
 import ShortenedLink from './ShortenedLink.jsx';
 
 import { shortenUrl } from '../actions/url';
+import { getUrls } from '../actions/url';
 
 export class HomePage extends React.Component {
 
@@ -29,6 +30,10 @@ export class HomePage extends React.Component {
         return $.toaster(errorMessage, '', 'danger');
       }
     }
+  }
+
+  componentDidMount() {
+    this.props.getUrls(localStorage.token);
   }
 
   onChange(element) {
@@ -112,7 +117,8 @@ const mapStateToProps = state => ({
 });
 
 const matchDispatchToProps = dispatch => bindActionCreators({
-  shortenUrl
+  shortenUrl,
+  getUrls
 }, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(HomePage);

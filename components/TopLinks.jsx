@@ -16,7 +16,7 @@ const TopLinks = (props) => (
     <tbody>
       {
         props.userUrls.map((userUrl, index) => (
-          <tr key={userUrl.id} id={userUrl.id}>
+          <tr key={userUrl.id} id={userUrl.id} onClick={props.getSelectedLinkRow} className="toplink-row">
             <th scope="row">{index + 1}</th>
             <td><a href={userUrl.shortened_url} target="_blank" className="url-anchor">{userUrl.shortened_url}</a></td>
             <td>{userUrl.number_of_click}</td>
