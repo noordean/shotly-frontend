@@ -9,6 +9,7 @@ import { SignUp } from '../../components/SignUp.jsx';
 
 global.$ = $;
 global.$.toaster = () => {};
+global.localStorage = {};
 
 const props = {
   userRegistration: {

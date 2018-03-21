@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import $ from 'jquery';
+import { Redirect } from 'react-router-dom';
 
 import Input from './Input.jsx';
 import Button from './Button.jsx';
@@ -50,6 +51,9 @@ export class SignUp extends React.Component {
   }
 
   render() {
+    if (localStorage.token) {
+      return <Redirect to='/dashboard' />;
+    }
     return (
       <div className="row form-page">
           <form>

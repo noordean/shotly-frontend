@@ -25,3 +25,25 @@ export function getUrls(state = { urls: [], errorMessage: '' }, action) {
       return state;
   }
 }
+
+export function updateUrl(state = { url: {}, errorMessage: '' }, action) {
+  switch (action.type) {
+    case 'UPDATE_URL_SUCCESS':
+      return { ...state, url: action.url, errorMessage: '' };
+    case 'UPDATE_URL_FAILURE':
+      return { ...state, errorMessage: action.errorMessage, url: {} };
+    default:
+      return state;
+  }
+}
+
+export function deleteUrl(state = { message: {}, errorMessage: '' }, action) {
+  switch (action.type) {
+    case 'DELETE_URL_SUCCESS':
+      return { ...state, message: action.message, errorMessage: '' };
+    case 'DELETE_URL_FAILURE':
+      return { ...state, errorMessage: action.errorMessage, message: {} };
+    default:
+      return state;
+  }
+}

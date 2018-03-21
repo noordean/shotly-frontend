@@ -16,17 +16,22 @@ const TopLinks = (props) => (
     <tbody>
       {
         props.userUrls.map((userUrl, index) => (
-          <tr key={userUrl.id}>
+          <tr key={userUrl.id} id={userUrl.id}>
             <th scope="row">{index + 1}</th>
             <td><a href={userUrl.shortened_url} target="_blank" className="url-anchor">{userUrl.shortened_url}</a></td>
             <td>{userUrl.number_of_click}</td>
-            <td><span className="fa fa-pencil" data-toggle="modal" data-target="#editModal"> </span> <span className="fa fa-trash"></span></td>
+            <td><span className="fa fa-pencil" data-toggle="modal" data-target="#editModal" onClick={props.getSelectedUrl}> </span> <span className="fa fa-trash" onClick={props.deleteUrlHandler}></span></td>
           </tr>
         ))
       }
     </tbody>
 
-    <EditUrlModal />
+    <EditUrlModal
+      editUrl={props.editUrl}
+      onChange={props.onChange}
+      urlToEdit={props.urlToEdit}
+      selectedUrlChars={props.selectedUrlChars}
+    />
   </table>
 );
 

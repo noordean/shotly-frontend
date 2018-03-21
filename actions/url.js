@@ -28,6 +28,34 @@ const getUrlsFailure = (errorMessage) => {
   }
 }
 
+const updateUrlSuccess = (url) => {
+  return {
+    type: 'UPDATE_URL_SUCCESS',
+    url
+  }
+}
+
+const updateUrlFailure = (errorMessage) => {
+  return {
+    type: 'UPDATE_URL_FAILURE',
+    errorMessage
+  }
+}
+
+const deleteUrlSuccess = (message) => {
+  return {
+    type: 'DELETE_URL_SUCCESS',
+    message
+  }
+}
+
+const deleteUrlFailure = (errorMessage) => {
+  return {
+    type: 'DELETE_URL_FAILURE',
+    errorMessage
+  }
+}
+
 const getToken = () => {
   if (localStorage.token) {
     return { token: localStorage.token };
@@ -65,6 +93,41 @@ export function getUrls(token) {
       })
       .catch((error) => {
         dispatch(getUrlsFailure(error.response.data.message));
+      });
+    };
+  }
+
+export function updateUrl(token, urlId, shortenedCharacters) {
+  return (dispatch) => {
+    return axios.put(`https://shotly-api.herokuapp.com/urls/${urlId}`, {
+      shortened_characters: shortenedCharacters
+    },
+    {
+      headers: {
+        token
+      }
+    })
+      .then((response) => {
+        dispatch(updateUrlSuccess(response.data));
+      })
+      .catch((error) => {
+        dispatch(updateUrlFailure(error.response.data.message));
+      });
+    };
+  }
+
+export function deleteUrl(token, urlId) {
+  return (dispatch) => {
+    return axios.delete(`https://shotly-api.herokuapp.com/urls/${urlId}`, {
+      headers: {
+        token
+      }
+    })
+      .then((response) => {
+        dispatch(deleteUrlSuccess(response.data));
+      })
+      .catch((error) => {    
+        dispatch(deleteUrlFailure(error.response.data.message));
       });
     };
   }
