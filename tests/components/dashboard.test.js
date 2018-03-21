@@ -20,6 +20,19 @@ const props = {
     }],
     errorMessage: ''
   },
+  deletedUrl: {
+    message: { message: 'Deleted successfully' },
+    errorMessage: ''
+  },
+  updatedUrl: {
+    url: {
+      id: 1,
+      shortened_url: 'https://shotly.com/ad',
+      original_url: 'http://verylongandugly.com/somethinglong',
+      user_id: 1
+    },
+    errorMessage: ''
+  },
   getUrls: () => Promise.resolve(),
 };
 

@@ -3,22 +3,33 @@ import { Link, Redirect } from 'react-router-dom';
 import Chart from 'chart.js';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import $ from 'jquery';
 
 import Input from './Input.jsx';
 import Button from './Button.jsx';
 import TopLinks from './TopLinks.jsx';
 import HomePage from './HomePage.jsx';
 
-import { getUrls } from '../actions/url';
+import { getUrls } from '../actions/url'
+import { updateUrl } from '../actions/url';
+import { deleteUrl } from '../actions/url';
+
 
 export class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       userUrls: [],
-      isLoading: true
+      isLoading: true,
+      urlToEdit: '',
+      selectedUrlId: '',
+      selectedUrlChars: ''
     };
     this.displayChart = this.displayChart.bind(this);
+    this.updateUserUrl = this.updateUserUrl.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.getSelectedUrl = this.getSelectedUrl.bind(this);
+    this.deleteUrlHandler = this.deleteUrlHandler.bind(this);
   }
 
   componentDidMount() {
@@ -73,6 +84,24 @@ export class Dashboard extends React.Component {
     if (this.props.userUrls !== nextProps.userUrls) {
       this.prepareUserUrls(nextProps.userUrls);
     }
+
+    if (this.props.updatedUrl.url !== nextProps.updatedUrl.url) {
+      if (nextProps.updatedUrl.errorMessage !== '') {
+        return $.toaster(nextProps.updatedUrl.errorMessage, '', 'danger');
+      }
+      
+      $.toaster('Link renamed successfully', '', 'success');
+      this.props.getUrls(localStorage.token);
+    }
+
+    if (this.props.deletedUrl !== nextProps.deletedUrl) {
+      if (nextProps.deletedUrl.errorMessage !== '') {
+        return $.toaster(nextProps.updatedUrl.errorMessage, '', 'danger');
+      }
+
+      $.toaster('Link successfully deleted', '', 'success');
+      this.props.getUrls(localStorage.token);
+    }
   }
 
   prepareUserUrls(userUrls) {
@@ -85,6 +114,33 @@ export class Dashboard extends React.Component {
       userUrls: urls,
       isLoading: false
     });
+  }
+
+  updateUserUrl() {
+    this.props.updateUrl(localStorage.token, this.state.selectedUrlId, this.state.urlToEdit);
+  }
+
+  onChange(element) {
+    this.setState({
+      [element.target.name]: element.target.value,
+    });
+  }
+
+  getShortenedCharacters(element) {
+    const url = $(element.target).parent().parent().find('.url-anchor').text();
+    return url.slice(url.lastIndexOf('/') + 1);
+  }
+
+  getSelectedUrl(element) {
+    this.setState({
+      selectedUrlId: $(element.target).parent().parent().attr('id'),
+      selectedUrlChars: this.getShortenedCharacters(element)
+    });
+  }
+
+  deleteUrlHandler(element) {
+    const selectedId = $(element.target).parent().parent().attr('id');
+    this.props.deleteUrl(localStorage.token, selectedId)
   }
 
   render() {
@@ -101,6 +157,12 @@ export class Dashboard extends React.Component {
           <div className="toplinks-wrapper">
             <TopLinks
               userUrls={this.state.userUrls}
+              editUrl={this.updateUserUrl}
+              onChange={this.onChange}
+              urlToEdit={this.state.urlToEdit}
+              getSelectedUrl={this.getSelectedUrl}
+              selectedUrlChars={this.state.selectedUrlChars}
+              deleteUrlHandler={this.deleteUrlHandler}
             />
           </div>
           <div className="chart-area">
@@ -113,11 +175,15 @@ export class Dashboard extends React.Component {
 };
 
 const mapStateToProps = state => ({
-  userUrls: state.userUrls
+  userUrls: state.userUrls,
+  updatedUrl: state.updatedUrl,
+  deletedUrl: state.deletedUrl
 });
 
 const matchDispatchToProps = dispatch => bindActionCreators({
-  getUrls
+  getUrls,
+  updateUrl,
+  deleteUrl
 }, dispatch);
 
 export default connect(mapStateToProps, matchDispatchToProps)(Dashboard);

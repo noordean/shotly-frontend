@@ -7,7 +7,7 @@ export default class EditUrlModal extends React.Component {
 
   render() {
     return (
-        <div className="modal fade" id="editModal" tabIndex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div className="modal" id="editModal" tabIndex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
               <div className="modal-header">
@@ -20,14 +20,17 @@ export default class EditUrlModal extends React.Component {
                 <form>
                   <div className="form-group">
                     <Input
+                      inputName="urlToEdit"
                       inputType="text"
-                      inputPlaceHolder="https://current-url.com"
+                      inputPlaceHolder={this.props.selectedUrlChars}
+                      inputValue={this.props.urlToEdit}
+                      onChange={this.props.onChange}
                     />
                   </div>
                 </form>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-success modal-send-btn">Save</button>
+                <button type="button" className="btn btn-success modal-send-btn update-user-url" onClick={this.props.editUrl}>Save</button>
                 <button type="button" className="btn btn-danger modal-close-btn" data-dismiss="modal">Close</button>
               </div>
             </div>

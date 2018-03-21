@@ -8,6 +8,7 @@ import { SignIn } from '../../components/SignIn.jsx';
 
 global.$ = $;
 global.$.toaster = () => {};
+global.localStorage = {};
 
 const props = {
   userLogin: {
