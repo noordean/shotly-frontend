@@ -19,7 +19,8 @@ const props = {
     },
     errorMessage: '',
     isAuthenticated: false
-  }
+  },
+  loginUser: () => {}
 };
 
 const mountWrapper = () => {

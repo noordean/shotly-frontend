@@ -2,10 +2,13 @@ import React from 'react';
 import { render, mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom'
 import sinon from 'sinon';
+import $ from 'jquery';
 
 import '../setup';
 import { Dashboard } from '../../components/Dashboard.jsx';
 
+global.$ = $;
+global.$.toaster = () => {};
 global.localStorage = {
   token: 'some_jargons'
 };
@@ -34,6 +37,8 @@ const props = {
     errorMessage: ''
   },
   getUrls: () => Promise.resolve(),
+  updateUrl: () => Promise.resolve(),
+  deleteUrl: () => Promise.resolve()
 };
 
 const mountWrapper = () => {
@@ -48,7 +53,8 @@ describe('<Dashboard />', () => {
     const spyPrepareUserUrls = sinon.spy(Dashboard.prototype, 'prepareUserUrls');    
     const wrapper = mountWrapper();
     wrapper.setProps({ ...props,
-        userUrls: { ...props.userUrls, errorMessage: 'something happened', urls: [] }
+        userUrls: { ...props.userUrls, errorMessage: 'something happened', urls: [] },
+        deletedUrl: { ...props.deletedUrl, errorMessage: 'something happend', message: {} }
     });
     expect(spyComponentWillReceiveProps.calledOnce).toBe(true);
     expect(spyPrepareUserUrls.calledOnce).toBe(true);

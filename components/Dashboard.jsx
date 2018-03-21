@@ -30,24 +30,26 @@ export class Dashboard extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.getSelectedUrl = this.getSelectedUrl.bind(this);
     this.deleteUrlHandler = this.deleteUrlHandler.bind(this);
+    this.getSelectedLinkRow = this.getSelectedLinkRow.bind(this);
   }
 
   componentDidMount() {
     this.props.getUrls(localStorage.token).then(() => {
-      this.displayChart();
+      const locationData = this.extractSelectedLocation(this.props.userUrls.urls[0][0].id);
+      this.displayChart(locationData.countries, locationData.numberOfClicks);
     });
   }
 
-  displayChart() {
+  displayChart(labels, data) {
     if (localStorage.token && this.state.userUrls.length !== 0) {
       const ctx = document.getElementById("myChart").getContext("2d");
       const urlChart = new Chart(ctx, {
           type: 'bar',
           data: {
-              labels: ['Nigeria', 'Kenya', 'Germany', 'US', 'Singapore', 'Uganda'],
+              labels,
               datasets: [{
                   label: '# of times visited',
-                  data: [12, 19, 3, 5, 2, 3],
+                  data,
                   backgroundColor: [
                       'rgba(255, 99, 132, 0.2)',
                       'rgba(0, 128, 128, 0.2)',
@@ -71,7 +73,7 @@ export class Dashboard extends React.Component {
               scales: {
                   yAxes: [{
                       ticks: {
-                          beginAtZero:true
+                          beginAtZero: true
                       }
                   }]
               }
@@ -140,7 +142,42 @@ export class Dashboard extends React.Component {
 
   deleteUrlHandler(element) {
     const selectedId = $(element.target).parent().parent().attr('id');
-    this.props.deleteUrl(localStorage.token, selectedId)
+    this.props.deleteUrl(localStorage.token, selectedId);
+  }
+
+  getSelectedLinkRow(element) {
+    if (this.extractSelectedLocation($(element.target).parent().attr('id')) !== false) {
+      const locationData = this.extractSelectedLocation($(element.target).parent().attr('id'));
+      this.displayChart(locationData.countries, locationData.numberOfClicks);
+    }
+  }
+
+  extractSelectedLocation(selectedId) {
+    let locations = [];
+    if (selectedId === undefined) {
+      return false;
+    }
+    this.props.userUrls.urls.forEach((url) => {
+      if (url[0].id == selectedId) {
+        locations = url[1];
+      }
+    });
+
+    return this.getLinkData(locations);
+  }
+
+  getLinkData(locations) {
+    const countries = [];
+    const numberOfClicks = [];
+    locations.forEach((location) => {
+      countries.push(location.country);
+      numberOfClicks.push(location.number_of_click);
+    });
+
+    return {
+      countries,
+      numberOfClicks
+    };
   }
 
   render() {
@@ -163,6 +200,7 @@ export class Dashboard extends React.Component {
               getSelectedUrl={this.getSelectedUrl}
               selectedUrlChars={this.state.selectedUrlChars}
               deleteUrlHandler={this.deleteUrlHandler}
+              getSelectedLinkRow={this.getSelectedLinkRow}
             />
           </div>
           <div className="chart-area">

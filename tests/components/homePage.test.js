@@ -23,7 +23,8 @@ const props = {
       original_url: 'http://verylongandugly.com/somethinglong'
     },
     errorMessage: ''
-  }
+  },
+  getUrls: () => Promise.resolve()
 };
 
 const mountWrapper = () => {
