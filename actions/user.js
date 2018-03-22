@@ -32,8 +32,8 @@ export function registerUser(userDetails) {
   return (dispatch) => {
     return axios.post('https://shotly-api.herokuapp.com/users', userDetails)
       .then((response) => {
-        dispatch(userRegSuccess(response.data));
         localStorage.setItem('token', response.data.token);
+        dispatch(userRegSuccess(response.data));
       })
       .catch((error) => {
         dispatch(userRegFailure(error.response.data.message));
