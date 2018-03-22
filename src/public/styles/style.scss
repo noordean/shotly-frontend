@@ -1,0 +1,282 @@
+
+.page {
+  background-color: #2EA2E2;
+  color: white;
+  height: 100vh;
+  font-family: 'Gentium Basic';
+  
+  .dashboard-msg {
+    text-align: center;
+    padding-top: 50px;
+  }
+  .header-wrapper {
+    text-transform: uppercase;
+    border-bottom: 1.5px inset #357ec7;
+    padding-bottom: 20px;
+
+    .header-title {
+      font-weight: bold;
+      font-size: 25px;
+      margin-left: 2em;
+      text-decoration: none;
+      color: white;
+    }
+    
+    .header-nav {
+      font-size: 12px;
+      margin-right: 5em;
+
+      span:first-child:hover {
+        border-top: 1px solid white;
+      }
+
+      span {
+        margin: 10px;
+        cursor: pointer;
+
+        a {
+          margin-top: 5px;
+          border: 1px solid #357ec7;
+        }
+      }
+    }
+
+    .modal-title {
+      color: #2EA2E2;
+      font-weight: bold;
+    }
+
+    .modal-close-btn, .modal-send-btn {
+      cursor: pointer;
+    }
+
+    .shortened-link {
+      text-transform: lowercase;
+      width: 96%;
+      height: 6vh;
+      border-radius: 3px;
+      color: black;
+      margin-left: 5px;
+      margin-top: 2px;
+
+      
+      .copy {
+        text-align: center;
+        background: #F5F5F5;
+        height: 22px;
+        cursor: pointer;
+      }
+
+      .copy:hover {
+        font-weight: bold;
+      }
+    }
+  }
+
+ .homepage-body-wrapper {
+   margin: 40px auto 0px auto;
+   width: 100vh;
+
+   .second-text {
+     text-align: center;
+     color: #e5e5e5 !important;
+   }
+
+   .btn-wrapper {
+     text-align: center;
+     
+     a:first-child {
+       background-color: #2EA2E2;
+     }
+
+     a:first-child:hover {
+       background-color: #357ec7;
+     }
+     
+     a {
+       width: 10em;
+       border: 1px solid #357ec7;
+       margin: 30px 10px;
+       cursor: pointer;
+     }
+   }
+
+    .url-submit {
+      width: 6em;
+      background-color: #2EA2E2;
+      border: 1px solid #357ec7;
+      cursor: pointer;
+    }
+
+    .url-submit:hover {
+      background-color: #357ec7;
+    }
+
+    .submit-form {
+      padding-left: 20px;
+
+      :first-child {
+        padding-right: 0;
+        padding-left: 1px;
+      }
+
+      .url-submit-wrapper {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+
+    .shortened-link {
+      width: 96%;
+      height: 10vh;
+      background: white;
+      border-radius: 3px;
+      color: black;
+      margin-left: 5px;
+      margin-top: 2px;
+      
+      .copy {
+        text-align: center;
+        background: #F5F5F5;
+        height: 22px;
+        cursor: pointer;
+      }
+
+      .copy:hover {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .footer {
+    text-align: center;
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+    font-size: 15px;
+  }
+
+  .form-page {
+    margin: 10vh auto;
+    width: 70vh;
+    border: 1px solid #357ec7;
+    border-radius: 4px;
+    padding: 3vh 0;
+
+    form {
+      margin: 0 auto;
+      width: 60vh;
+
+      a {
+        cursor: pointer;
+      }
+    }
+
+    h4 {
+      margin-bottom: 3vh;
+    }
+  }
+
+  .social-login-icons {
+    text-align: right;
+    margin-top: 5px;
+    
+    .fa-facebook:hover {
+      color: blue;
+    }
+
+    .fa-google:hover {
+      color: red;
+    }
+
+    .fa-facebook, .fa-google {
+      cursor: pointer;
+    }
+
+    span {
+      margin: 5px;
+    }
+  }
+
+  .about-us-page {
+
+    img {
+      width: 96%;
+      margin: 20px auto;
+    }
+
+    .about-us-text {
+      width: 53vh;
+      margin: 2px auto;
+      font-size: 18px;
+    }
+  }
+
+  .dashboard {
+    margin: 20px auto 0px auto;
+    width: 1200px;
+
+    .toplinks-wrapper {
+      height: 300px;
+      overflow-y: scroll;
+      margin: 0px auto;
+      width: 100%;
+      
+      .url-anchor {
+        color: white;
+      }
+    }
+    
+    .chart-area {
+      background-color: white;
+    }
+
+    .toplinks-table {
+      background-color: rgb(46, 162, 226);
+      border: 1px solid white;
+      margin: 0px auto;
+      width: 100%;
+      
+      tbody {
+        tr {
+          cursor: pointer;
+        }
+
+        tr:hover {
+          background-color: blue;
+        }
+      }
+
+      tbody tr td {
+        .fa {
+          cursor: pointer;
+        }
+
+        .fa-trash {
+          margin-left: 3px;
+          color: #ff0000;
+        }
+      }
+      .modal-title {
+        color: #2EA2E2;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 360px) and (max-width: 1000px) {
+  .page {
+    .form-page {
+      width: 35vh;
+
+      form {
+        width: 30vh;
+      }
+    }
+
+    .homepage-body-wrapper {
+      width: 35vh;
+    }
+  }
+}
