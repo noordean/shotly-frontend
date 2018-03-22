@@ -2,9 +2,10 @@
   "name": "shotly-frontend",
   "version": "1.0.0",
   "description": "An app that shortens ugly and long urls",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "jest --coverage tests"
+    "test": "jest --coverage tests",
+    "start": "./node_modules/.bin/webpack -p --config webpack.config.js && babel-node -- server.js"
   },
   "repository": {
     "type": "git",
@@ -61,6 +62,7 @@
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "chart.js": "^2.7.2",
+    "express": "^4.16.3",
     "immutable": "^3.8.2",
     "jquery": "^3.3.1",
     "prop-types": "^15.6.1",
