@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "test": "jest --coverage tests",
-    "postinstall": "npm install",
     "start": "./node_modules/.bin/webpack -p --config webpack.config.js && babel-node -- server.js"
   },
   "repository": {
