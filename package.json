@@ -1,11 +1,14 @@
 {
   "name": "shotly-frontend",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.11.0"
+  },
   "description": "An app that shortens ugly and long urls",
   "main": "server.js",
   "scripts": {
     "test": "jest --coverage tests",
-    "start": "./node_modules/.bin/webpack -p --config webpack.config.js && babel-node -- server.js"
+    "start": "babel-node -- server.js"
   },
   "repository": {
     "type": "git",
@@ -73,6 +76,10 @@
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
-    "webpack": "^4.0.1"
+    "webpack": "^4.0.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.3",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1"
   }
 }
